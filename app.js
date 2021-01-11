@@ -63,6 +63,7 @@ mongoose.connect(
 const userSchema = new mongoose.Schema({
     email:{
         type:String,
+        unique:true
     },
     password:{
         type:String,
@@ -98,7 +99,7 @@ app.get('/register', (req, res) => {
   res.render('register')
 })
 app.get('/secrets', (req, res) => {
-  if(req.isAuthenticated)
+  if(req.isAuthenticated())
   {
       res.render('secrets')
   }
@@ -106,6 +107,7 @@ app.get('/secrets', (req, res) => {
       res.redirect('/login')
   }
 })
+
 app.get('/logout', function (req, res) {
     req.logout()
     res.redirect('/')
